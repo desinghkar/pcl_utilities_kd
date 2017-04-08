@@ -28,6 +28,7 @@ class Filter_Table
     tf::Transform transform;
     pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_camera;
     pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_base;
+    pcl::PointIndices::Ptr orig_indices;
 
   //
   public:

@@ -134,14 +134,22 @@ include_directories(
 # add_dependencies(pcl_utilities_kd ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
+add_executable(pcl_utilities_kd_loop_transform src/example_loop_transform.cpp src/filter_table.cpp)
 add_executable(pcl_utilities_kd_filter_table src/example_filter_table.cpp src/filter_table.cpp)
+add_executable(pcl_utilities_kd_extract_3d_segment src/example_extract_3d_segment_from_2d.cpp src/rgbd_association.cpp)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(pcl_utilities_kd_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
+target_link_libraries(pcl_utilities_kd_loop_transform
+  ${catkin_LIBRARIES}
+)
 target_link_libraries(pcl_utilities_kd_filter_table
+  ${catkin_LIBRARIES}
+)
+target_link_libraries(pcl_utilities_kd_extract_3d_segment
   ${catkin_LIBRARIES}
 )
 

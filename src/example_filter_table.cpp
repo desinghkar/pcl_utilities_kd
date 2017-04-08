@@ -52,11 +52,11 @@ int main(int arc, char** arv)
   ft.setTransform(trans);
   ft.setInputCloudwrtCamera(cloud_in);
   ft.transformToBase();
-//  cloud_b = ft.getCloudwrtBase();
+  cloud_b = ft.getCloudwrtBase();
 
   ft.filterTable(cloud_out);
   //save as a pcd
   pcl::io::savePCDFileASCII ("test_pcd.pcd", *cloud_out);
-  //pcl::io::savePCDFileASCII ("test_pcd_b.pcd", *cloud_b);
+  pcl::io::savePCDFileASCII ("test_pcd_b.pcd", *cloud_b);
   return 0;
 }
