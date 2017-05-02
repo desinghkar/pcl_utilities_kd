@@ -106,9 +106,9 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
+  INCLUDE_DIRS include
 #  LIBRARIES pcl_utilities_kd
-#  CATKIN_DEPENDS cv_bridge geometry_msgs image_transport opencv2 pcl_ros roscpp rospy sensor_msgs std_msgs tf
+  CATKIN_DEPENDS cv_bridge geometry_msgs image_transport pcl_ros roscpp rospy sensor_msgs std_msgs tf
 #  DEPENDS system_lib
 )
 
@@ -124,9 +124,13 @@ include_directories(
 )
 
 ## Declare a C++ library
-# add_library(pcl_utilities_kd
-#   src/${PROJECT_NAME}/pcl_utilities_kd.cpp
-# )
+add_library(pcl_utilities_kd_filter_table
+  src/filter_table.cpp
+)
+add_library(pcl_utilities_kd_rgbd_association
+  src/rgbd_association.cpp
+)
+
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -135,7 +139,7 @@ include_directories(
 
 ## Declare a C++ executable
 add_executable(pcl_utilities_kd_loop_transform src/example_loop_transform.cpp src/filter_table.cpp)
-add_executable(pcl_utilities_kd_filter_table src/example_filter_table.cpp src/filter_table.cpp)
+add_executable(pcl_utilities_kd_filter_table_example src/example_filter_table.cpp src/filter_table.cpp)
 add_executable(pcl_utilities_kd_extract_3d_segment src/example_extract_3d_segment_from_2d.cpp src/rgbd_association.cpp)
 
 ## Add cmake target dependencies of the executable
@@ -143,15 +147,22 @@ add_executable(pcl_utilities_kd_extract_3d_segment src/example_extract_3d_segmen
 # add_dependencies(pcl_utilities_kd_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
+target_link_libraries(pcl_utilities_kd_filter_table
+  ${catkin_LIBRARIES}
+)
+target_link_libraries(pcl_utilities_kd_rgbd_association
+  ${catkin_LIBRARIES}
+)
 target_link_libraries(pcl_utilities_kd_loop_transform
   ${catkin_LIBRARIES}
 )
-target_link_libraries(pcl_utilities_kd_filter_table
+target_link_libraries(pcl_utilities_kd_filter_table_example
   ${catkin_LIBRARIES}
 )
 target_link_libraries(pcl_utilities_kd_extract_3d_segment
   ${catkin_LIBRARIES}
 )
+
 
 #############
 ## Install ##
@@ -168,7 +179,7 @@ target_link_libraries(pcl_utilities_kd_extract_3d_segment
 # )
 
 ## Mark executables and/or libraries for installation
-# install(TARGETS pcl_utilities_kd pcl_utilities_kd_node
+# install(TARGETS pcl_utilities_kd_filter_table pcl_utilities_kd_rgbd_association
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}

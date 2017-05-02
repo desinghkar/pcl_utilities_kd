@@ -43,6 +43,15 @@ void Filter_Table::filterTable(pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_out)
 
   //Transform back to the camera frame
   tf::Transform inverse_tf = transform.inverse();
-  pcl_ros::transformPointCloud(*temp, *cloud_out, inverse_tf); 
-
+  pcl_ros::transformPointCloud(*temp, *cloud_out, inverse_tf);
+  /*
+  tf::Vector3 pos = transform.getOrigin();
+  tf::Quaternion ori = transform.getRotation(); 
+  cout << "Transform " << pos[0] << " " << pos[1] << " " << pos[2] << endl;
+  cout << "Rotation " << ori.x() << " " << ori.y()  << " " << ori.z() << " " << ori.w() << endl;
+  cout << "table height " << table_height << endl;
+  cout << "Before filter " << cloud_base->points.size() << endl;
+  cout << "Before transform " << temp->points.size() << endl;
+  cout << "After trasnform " << cloud_out->points.size() << endl;
+  */
 }
